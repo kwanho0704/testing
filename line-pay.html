@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title>Line Pay - TP</title>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<style>
+			body{
+				font-family:Microsoft JhengHei !important;
+				}
+			.navbar-brand{
+				font-size:36px;
+				font-weight:bold;
+			}
+			.nav-link{
+				color:grey !important;
+			}
+			.detail_name{
+				font-weight:bold;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+			<a class="navbar-brand" href="#">揪好揪滿</a>
+			<button class="navbar-toggler" data-toggle="collapse" data-target="#main_menu">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse" id="main_menu">
+				<ul class="navbar-nav">
+					<li class="nav-item px-md-3 px-sm-2"><a class="nav-link" href="#">約一波浪漫</a></li>
+					<li class="nav-item px-md-3 px-sm-2"><a class="nav-link" href="#">外賣仔在哪</a></li>
+					<li class="nav-item px-md-3 px-sm-2"><a class="nav-link" href="#">社群&好友</a></li>
+					<li class="nav-item px-md-3 px-sm-2"><a class="nav-link" href="#">個人設定</a></li>
+				</ul>
+			</div>
+		</nav>
+		
+		<div class="container_fluid">
+			<div class="row no-gutters">
+				<div class="col-md p-1"><img src="test_01.jpg" class="img-fluid img-thumbnail"></div>
+				<div class="col-md p-1" style="">
+					<ul class="list-group detail">
+						<li class="list-group-item"><span class="detail_name">店家名稱：</span><span id="restaurant">吉野家</span></li>
+						<li class="list-group-item"><span class="detail_name">餐品名稱：</span><span id="dish">好好呷鷄腿飯</span></li>
+						<li class="list-group-item"><span class="detail_name">價格：</span><span id="price">120</span></li>
+						<li class="list-group-item"><span class="detail_name">是否供應：</span>是</li>
+						<li class="list-group-item"><span class="detail_name">評價：</span>8.6/10</li>
+						<li class="list-group-item"><span class="detail_name">總金額：</span><span class="detail_name" id="total_amount"></span></li>
+						<li class="list-group-item">
+							<div class="input-group">
+								<span class="my-auto detail_name">訂購數量：</span>
+								<div class="input-group-prepend">							
+									<input type="text" class="form-control" id="book_quantity">
+									<button class="btn btn-outline-secondary" type="button" id="book_button">馬上付款</button>
+								</div>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+		$("#book_button").click(function(){
+			
+			var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://sandbox-api-pay.line.me/v2/payments/request",
+  "method": "POST",
+  "headers": {
+    "x-line-channelid": "1616321790",
+    "x-line-channelsecret": "0b37b21029cf442add8e5b48302ce524",
+    "content-type": "application/json",
+    "cache-control": "no-cache",
+    "postman-token": "4d1ad4e2-6d03-d36e-d420-18afc1e05030"
+  },
+  "processData": false,
+  "data": "{\n\t\"amount\":100,\n\t\"productImageUrl\":\"http://placehold.it/84x84\",\n\t\"confirmUrl\":\"http://127.0.0.1/9000\",\n\t\"productName\":\"testproduct\",\n\t\"orderId\":\"1234\",\n\t\"currency\":\"TWD\"\n}"
+}
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+		});
+    
+	</script>
+		
+		
+	</body>
+</html>
